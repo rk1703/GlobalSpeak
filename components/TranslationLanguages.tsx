@@ -12,7 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import translate from "@/action/translate";
 
@@ -27,73 +27,82 @@ export type State = typeof initialState;
 
 function TranslationForm({ languages }: { languages: TranslationLanguages }) {
 
-    // const [state, formAction] = useFormState(translate, initialState)
+    const [state, formAction] = useFormState(translate, initialState);
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
 
+    useEffect(() => {
+        if (state.output) {
+            setOutput(state.output);
+        }
+    }, [state])
+
+
     return (
         <div>
-            <form>
-                <div>
-                    <Select name="inputLanguage" defaultValue="auto">
-                        <SelectTrigger className="w-[280px]">
-                            <SelectValue placeholder="Select a Language" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Want us to figure it out?</SelectLabel>
-                                <SelectItem key="auto" value="auto">Auto-Detection</SelectItem>
+            <form action={formAction}>
+                <div className="flex flex-col space-y-2 lg:space-y-0 lg:flex-row lg:space-x-2">
+                    <div className="flex-1 space-y-2">
+                        <Select name="inputLanguage" defaultValue="auto">
+                            <SelectTrigger className="w-[280px] border-none text-blue-500 font-bold">
+                                <SelectValue placeholder="Select a Language" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Want us to figure it out?</SelectLabel>
+                                    <SelectItem key="auto" value="auto">Auto-Detection</SelectItem>
 
-                            </SelectGroup>
-                            <SelectGroup>
-                                <SelectLabel>
-                                    Languages
-                                </SelectLabel>
-                                {Object.entries(languages.translation).map(([key, value]) => (
-                                    <SelectItem key={key} value={key}>{value.name}</SelectItem>
-                                ))}
-                            </SelectGroup>
+                                </SelectGroup>
+                                <SelectGroup>
+                                    <SelectLabel>
+                                        Languages
+                                    </SelectLabel>
+                                    {Object.entries(languages.translation).map(([key, value]) => (
+                                        <SelectItem key={key} value={key}>{value.name}</SelectItem>
+                                    ))}
+                                </SelectGroup>
 
-                        </SelectContent>
-                    </Select>
-                    <Textarea
-                        placeholder="Type your message here"
-                        name="input"
-                        className="min-h-32 text-xl"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <Select name="outputLanguage" defaultValue="hi">
-                        <SelectTrigger className="w-[280px]">
-                            <SelectValue placeholder="Select a Language" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                <SelectLabel>Want us to figure it out?</SelectLabel>
-                                <SelectItem key="auto" value="auto">Auto-Detection</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Textarea
+                            placeholder="Type your message here"
+                            name="input"
+                            className="min-h-32 text-xl"
+                            value={input}
+                            onChange={(e) => setInput(e.target.value)}
+                        />
+                    </div>
+                    <div className="flex-1 space-y-2">
+                        <Select name="outputLanguage" defaultValue="hi">
+                            <SelectTrigger className="w-[280px] font-bold text-blue-500 border-none">
+                                <SelectValue placeholder="Select a Language" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    <SelectLabel>Want us to figure it out?</SelectLabel>
+                                    <SelectItem key="auto" value="auto">Auto-Detection</SelectItem>
 
-                            </SelectGroup>
-                            <SelectGroup>
-                                <SelectLabel>
-                                    Languages
-                                </SelectLabel>
-                                {Object.entries(languages.translation).map(([key, value]) => (
-                                    <SelectItem key={key} value={key}>{value.name}</SelectItem>
-                                ))}
-                            </SelectGroup>
+                                </SelectGroup>
+                                <SelectGroup>
+                                    <SelectLabel>
+                                        Languages
+                                    </SelectLabel>
+                                    {Object.entries(languages.translation).map(([key, value]) => (
+                                        <SelectItem key={key} value={key}>{value.name}</SelectItem>
+                                    ))}
+                                </SelectGroup>
 
-                        </SelectContent>
-                    </Select>
-                    <Textarea
-                        disabled
-                        placeholder="Type your message here"
-                        name="output"
-                        className="min-h-32 text-xl"
-                        value={output}
-                        onChange={(e) => setOutput(e.target.value)}
-                    />
+                            </SelectContent>
+                        </Select>
+                        <Textarea
+                            disabled
+                            placeholder="Type your message here"
+                            name="output"
+                            className="min-h-32 text-xl"
+                            value={output}
+                            onChange={(e) => setOutput(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <div>
                     <button type="submit">Submit</button>
