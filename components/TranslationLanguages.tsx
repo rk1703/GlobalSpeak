@@ -12,7 +12,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useFormState } from "react-dom";
 import translate from "@/action/translate";
 
@@ -30,6 +30,18 @@ function TranslationForm({ languages }: { languages: TranslationLanguages }) {
     const [state, formAction] = useFormState(translate, initialState);
     const [input, setInput] = useState("");
     const [output, setOutput] = useState("");
+    const submitButtonRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        if (!input.trim()) return;
+
+        const delayDebounceFunction = setTimeout(() => {
+            //submit the form
+            submitButtonRef.current?.click();
+        }, 1000);
+
+        return () => clearTimeout(delayDebounceFunction);
+    }, [input])
 
     useEffect(() => {
         if (state.output) {
@@ -105,7 +117,7 @@ function TranslationForm({ languages }: { languages: TranslationLanguages }) {
                     </div>
                 </div>
                 <div>
-                    <button type="submit">Submit</button>
+                    <button type="submit" ref={submitButtonRef}>Submit</button>
                 </div>
 
             </form>

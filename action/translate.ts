@@ -1,8 +1,10 @@
 "use server";
 
 import { State } from "@/components/TranslationLanguages";
+import { addOrUpdateUser } from "@/mongodb/models/User";
 import { auth } from "@clerk/nextjs/server";
 import axios from "axios";
+import { revalidateTag } from "next/cache";
 import { v4 } from "uuid";
 
 const key = process.env.AZURE_TEXT_TRANSLATION_KEY;
@@ -48,6 +50,24 @@ async function translate(prevState: State, formData: FormData) {
   }
 
   //Push to db
+  if (rawFormData.inputLanguage === "auto") {
+    rawFormData.inputLanguage = data[0].detectedLanguage.language;
+  }
+
+  try {
+    const translation = {
+      to: rawFormData.outputLanguage,
+      from: rawFormData.inputLanguage,
+      fromText: rawFormData.input,
+      toText: data[0].translations[0].text,
+    };
+
+    addOrUpdateUser(userId, translation);
+  } catch (error) {
+    console.log("Error in adding data to db", error);
+  }
+
+  revalidateTag("translationHistory");
 
   return {
     ...prevState,
