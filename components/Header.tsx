@@ -6,14 +6,14 @@ import Link from "next/link";
 export default function Header() {
     const { userId } = auth();
     return (
-        <header className="flex justify-between items-center px-6 mb-4 border-b-2">
+        <header className="flex justify-between items-center px-6 mb-4 border-b-2 py-0.5 h-16">
             <div>
                 <Link href="/">
                     <Image
-                        src="/logo.png"
+                        src="/logo2.png"
                         alt="logo"
-                        width={150}
-                        height={100}
+                        width={48}
+                        height={48}
                         className="object-contain cursor-pointer"
                     />
                 </Link>
