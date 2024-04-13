@@ -56,8 +56,6 @@ export async function addOrUpdateUser(
       update,
       options
     );
-    console.log("user", user);
-    console.log("User added or updated:", user);
     if (!user) {
       throw new Error("User not found and was not created.");
     }
