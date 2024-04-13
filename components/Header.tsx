@@ -8,7 +8,7 @@ export default function Header() {
     return (
         <header className="flex justify-between items-center px-6 mb-4 border-b-2 py-0.5 h-16">
             <div>
-                <Link href="/">
+                <Link href="/" className="flex items-center justify-center space-x-3">
                     <Image
                         src="/logo2.png"
                         alt="logo"
@@ -16,7 +16,10 @@ export default function Header() {
                         height={48}
                         className="object-contain cursor-pointer"
                     />
+                    <p className="text-2xl font-medium lg:tracking-wide">Global Speak</p>
+
                 </Link>
+
             </div>
             <div>
                 {userId ? (
