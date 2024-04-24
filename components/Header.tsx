@@ -5,9 +5,7 @@ import Link from "next/link";
 
 export default function Header() {
     const { userId } = auth();
-    const url = `${process.env.NODE_ENV === "development" ?
-    "http://localhost:3000" :
-    process.env.VERCEL_URL}/translate`;
+    const url = "https://globalspeak.rkworld.me/translate";
     return (
         <header className="flex justify-between items-center px-6 mb-4 border-b-2 py-0.5 h-16">
             <div>

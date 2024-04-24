@@ -15,7 +15,7 @@ export default async function TraslationHistory() {
     //     "http://localhost:3000" :
     //     process.env.VERCEL_URL}/translationHistory?userId=${userId}`;
 
-    const response = await fetch(`https://globalspeak.vercel.app/translationHistory?userId=${userId}`, {
+    const response = await fetch(`https://globalspeak.rkworld.me/translationHistory?userId=${userId}`, {
         next: {
             tags: ["translationHistory"],
         }

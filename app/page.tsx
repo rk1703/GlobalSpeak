@@ -6,9 +6,7 @@ import Link from "next/link";
 
 export default function Home() {
   const { userId } = auth();
-  const url = `${process.env.NODE_ENV === "development" ?
-    "http://localhost:3000" :
-    process.env.VERCEL_URL}/translate`;
+  const url = "https://globalspeak.rkworld.me/translate";
   return (
     <main className="flex flex-col items-center justify-center mt-16 lg:mt-0 p-10 pt-5 lg:h-[calc(100vh-5rem)]">
       <h1 className="text-3xl lg:text-5xl text-center pb-8 mb-2 font-light">
