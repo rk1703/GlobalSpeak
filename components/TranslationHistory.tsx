@@ -11,10 +11,6 @@ const getlanguage = (code: string) => {
 export default async function TraslationHistory() {
     const { userId } = auth();
 
-    // const url = `${process.env.NODE_ENV === "development" ?
-    //     "http://localhost:3000" :
-    //     process.env.VERCEL_URL}/translationHistory?userId=${userId}`;
-
     const response = await fetch(`https://globalspeak.rkworld.me/translationHistory?userId=${userId}`, {
         next: {
             tags: ["translationHistory"],

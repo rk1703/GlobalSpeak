@@ -46,8 +46,6 @@ export async function addOrUpdateUser(
   };
   await connectDb();
 
-  // write a function to add two number
-
   const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
   try {
