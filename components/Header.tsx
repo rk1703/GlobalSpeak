@@ -29,7 +29,7 @@ export default function Header() {
                     </div>
 
                 ) : (
-                    <SignInButton afterSignInUrl={url} mode="modal" />
+                    <SignInButton fallbackRedirectUrl={url} mode="modal" />
                 )}
             </div>
         </header>
