@@ -11,7 +11,7 @@ const getlanguage = (code: string) => {
 export default async function TraslationHistory() {
     const { userId } = auth();
 
-    const response = await fetch(`https://globalspeak.rkworld.me/translationHistory?userId=${userId}`, {
+    const response = await fetch(`https://dapper-rabanadas-0eb7d0.netlify.app/translationHistory?userId=${userId}`, {
         next: {
             tags: ["translationHistory"],
         }
