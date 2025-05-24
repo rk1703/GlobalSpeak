@@ -4,7 +4,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://globalspeak.rkworld.me](https://globalspeak.rkworld.me)
+[https://globalspeak.rkworld.codes](https://globalspeak.rkworld.codes)
 
 <h2>Project Screenshots:</h2>
 

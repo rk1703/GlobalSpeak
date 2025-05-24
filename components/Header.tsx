@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function Header() {
     const { userId } = auth();
-    const url = "https://globalspeak.rkworld.me/translate";
+    const url = "https://globalspeak.rkworld.codes/translate";
     return (
         <header className="flex justify-between items-center px-6 mb-4 border-b-2 py-0.5 h-16">
             <div>
