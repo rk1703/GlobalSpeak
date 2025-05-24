@@ -6,10 +6,11 @@ import DeleteTranslation from "@/action/deleteTranslation"
 
 const DeleteTranslationButton = ({ id }: { id: string }) => {
 
-    const DeleteTranslationAction = DeleteTranslation.bind(null,id);
+    // const DeleteTranslationAction = DeleteTranslation.bind(null,id);
 
     return (
-        <form action={DeleteTranslationAction}>
+        <form action={DeleteTranslation}>
+            <input type="hidden" name="Id" value={id} />
             <Button type="submit" variant={"outline"} size={"icon"} className="border-red-500 text-red-500 hover:bg-red-400 hover:text-white">
                 <TrashIcon size={16} />
             </Button>

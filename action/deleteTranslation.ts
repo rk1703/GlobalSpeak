@@ -4,17 +4,18 @@ import { removeTrasnslation } from "@/mongodb/models/User";
 import { auth } from "@clerk/nextjs/server";
 import { revalidateTag } from "next/cache";
 
-async function DeleteTranslation(id: string) {
+async function DeleteTranslation(formdata: FormData) {
   auth().protect();
   const { userId } = auth();
 
-  const user = await removeTrasnslation(userId!, id);
+  const id = formdata.get("Id") as string;
+  await removeTrasnslation(userId!, id);
 
   revalidateTag("translationHistory");
 
-  return {
-    translations: JSON.stringify(user.translations),
-  };
+  // return {
+  //   translations: JSON.stringify(user.translations),
+  // };
 }
 
 export default DeleteTranslation;
